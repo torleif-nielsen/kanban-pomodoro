@@ -20,8 +20,13 @@ type alias Card =
 type alias CardList =
   List Card
 
+type alias BoardList =
+  List Board
+
 type alias Board =
-  List CardList
+  { title : String
+  , cards : CardList
+  }
 
 cardList =
   [ { description = "First Task"  }
@@ -30,9 +35,9 @@ cardList =
   ]
 
 boardList =
-  [ cardList
-  , cardList
-  , cardList
+  [ { title = "Board One", cards = cardList }
+  , { title = "Board Two", cards = cardList }
+  , { title = "Board Three", cards = cardList }
   ]
 
 init =
@@ -41,7 +46,7 @@ init =
 -- This is referred to as the "model container"
 type alias Model =
   { count : Int
-  , cardList : CardList
+  , boardList : BoardList
   , mdl : Material.Model
     -- Boilerplate: model store for any and all Mdl components you use.
   }
@@ -51,7 +56,7 @@ type alias Model =
 model : Model
 model =
   { count = 0
-  , cardList = cardList
+  , boardList = boardList
   , mdl =
     Material.model
     -- Boilerplate: Always use this initial Mdl model store.
@@ -112,10 +117,10 @@ board board =
           []
           [ Card.head
             []
-            [ text "Board" ]
+            [ text board.title ]
           ]
         , Card.text []
-            [ ul [ class "" ] (List.map cardItem board) ]
+            [ ul [ class "" ] (List.map cardItem board.cards) ]
         , Card.actions
             [ Card.border ]
             [ Button.render Mdl [1,0] model.mdl
@@ -132,7 +137,7 @@ viewBody : Model -> Html Msg
 viewBody model =
   Options.div
     []
-    [ (List.map board boardList) |> grid []  
+    [ (List.map board boardList) |> grid []
     ]
     |> Material.Scheme.top
 

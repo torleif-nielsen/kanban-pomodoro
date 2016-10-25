@@ -13979,15 +13979,23 @@ var _user$project$Board$cardList = _elm_lang$core$Native_List.fromArray(
 		{description: 'Third Task'}
 	]);
 var _user$project$Board$boardList = _elm_lang$core$Native_List.fromArray(
-	[_user$project$Board$cardList, _user$project$Board$cardList, _user$project$Board$cardList]);
+	[
+		{title: 'Board One', cards: _user$project$Board$cardList},
+		{title: 'Board Two', cards: _user$project$Board$cardList},
+		{title: 'Board Three', cards: _user$project$Board$cardList}
+	]);
 var _user$project$Board$init = _user$project$Board$boardList;
-var _user$project$Board$model = {count: 0, cardList: _user$project$Board$cardList, mdl: _debois$elm_mdl$Material$model};
+var _user$project$Board$model = {count: 0, boardList: _user$project$Board$boardList, mdl: _debois$elm_mdl$Material$model};
 var _user$project$Board$Card = function (a) {
 	return {description: a};
 };
+var _user$project$Board$Board = F2(
+	function (a, b) {
+		return {title: a, cards: b};
+	});
 var _user$project$Board$Model = F3(
 	function (a, b, c) {
-		return {count: a, cardList: b, mdl: c};
+		return {count: a, boardList: b, mdl: c};
 	});
 var _user$project$Board$Mdl = function (a) {
 	return {ctor: 'Mdl', _0: a};
@@ -14021,7 +14029,7 @@ var _user$project$Board$board = function (board) {
 									[]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html$text('Board')
+										_elm_lang$html$Html$text(board.title)
 									]))
 							])),
 						A2(
@@ -14036,7 +14044,7 @@ var _user$project$Board$board = function (board) {
 									[
 										_elm_lang$html$Html_Attributes$class('')
 									]),
-								A2(_elm_lang$core$List$map, _user$project$Board$cardItem, board))
+								A2(_elm_lang$core$List$map, _user$project$Board$cardItem, board.cards))
 							])),
 						A2(
 						_debois$elm_mdl$Material_Card$actions,
