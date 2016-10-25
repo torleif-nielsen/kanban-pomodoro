@@ -28,16 +28,25 @@ type alias Board =
   , cards : CardList
   }
 
-cardList =
+cardList1 =
   [ { description = "First Task"  }
   , { description = "Second Task" }
   , { description = "Third Task"  }
   ]
 
+cardList2 =
+  [ { description = "First Task"  }
+  ]
+
+cardList3 =
+  [ { description = "First Task"  }
+  , { description = "Second Task" }
+  ]
+
 boardList =
-  [ { title = "Board One", cards = cardList }
-  , { title = "Board Two", cards = cardList }
-  , { title = "Board Three", cards = cardList }
+  [ { title = "Board One"  , cards = cardList1 }
+  , { title = "Board Two"  , cards = cardList2 }
+  , { title = "Board Three", cards = cardList3 }
   ]
 
 init =
@@ -105,14 +114,30 @@ view model =
     }
 
 cardItem card =
-  li [ class "" ] [ text (toString card.description) ]
+  Card.view
+    [ Elevation.e2
+    , css "margin-bottom" "10px"
+    ]
+    [ Card.title
+      []
+      [ Card.head
+        []
+        [ text card.description ]
+      ]
+    , Card.text
+      []
+      [ text "Card description" ]
+    , Card.actions
+      []
+      []
+    ]
 
 board board =
   cell
-    [ size Desktop 4, size Tablet 6, size Phone 12]
+    [ size Desktop 4, size Tablet 6, size Phone 12 ]
     [
       Card.view
-        [ Elevation.e2 ]
+        [  Elevation.e2 ]
         [ Card.title
           []
           [ Card.head
@@ -120,7 +145,7 @@ board board =
             [ text board.title ]
           ]
         , Card.text []
-            [ ul [ class "" ] (List.map cardItem board.cards) ]
+            [ Options.div [] (List.map cardItem board.cards) ]
         , Card.actions
             [ Card.border ]
             [ Button.render Mdl [1,0] model.mdl
@@ -139,7 +164,7 @@ viewBody model =
     []
     [ (List.map board boardList) |> grid []
     ]
-    |> Material.Scheme.top
+    -- |> Material.Scheme.top
 
 -- Load Google Mdl CSS. You'll likely want to do that not in code as we
 -- do here, but rather in your master .html file. See the documentation

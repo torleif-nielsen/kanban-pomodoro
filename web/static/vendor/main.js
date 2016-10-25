@@ -13956,15 +13956,43 @@ var _debois$elm_mdl$Material_Scheme$top = function (content) {
 
 var _user$project$Board$cardItem = function (card) {
 	return A2(
-		_elm_lang$html$Html$li,
+		_debois$elm_mdl$Material_Card$view,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('')
+				_debois$elm_mdl$Material_Elevation$e2,
+				A2(_debois$elm_mdl$Material_Options$css, 'margin-bottom', '10px')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html$text(
-				_elm_lang$core$Basics$toString(card.description))
+				A2(
+				_debois$elm_mdl$Material_Card$title,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_debois$elm_mdl$Material_Card$head,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(card.description)
+							]))
+					])),
+				A2(
+				_debois$elm_mdl$Material_Card$text,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Card description')
+					])),
+				A2(
+				_debois$elm_mdl$Material_Card$actions,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[]))
 			]));
 };
 var _user$project$Board$update = F2(
@@ -13972,7 +14000,16 @@ var _user$project$Board$update = F2(
 		var _p0 = msg;
 		return A2(_debois$elm_mdl$Material$update, _p0._0, model);
 	});
-var _user$project$Board$cardList = _elm_lang$core$Native_List.fromArray(
+var _user$project$Board$cardList3 = _elm_lang$core$Native_List.fromArray(
+	[
+		{description: 'First Task'},
+		{description: 'Second Task'}
+	]);
+var _user$project$Board$cardList2 = _elm_lang$core$Native_List.fromArray(
+	[
+		{description: 'First Task'}
+	]);
+var _user$project$Board$cardList1 = _elm_lang$core$Native_List.fromArray(
 	[
 		{description: 'First Task'},
 		{description: 'Second Task'},
@@ -13980,9 +14017,9 @@ var _user$project$Board$cardList = _elm_lang$core$Native_List.fromArray(
 	]);
 var _user$project$Board$boardList = _elm_lang$core$Native_List.fromArray(
 	[
-		{title: 'Board One', cards: _user$project$Board$cardList},
-		{title: 'Board Two', cards: _user$project$Board$cardList},
-		{title: 'Board Three', cards: _user$project$Board$cardList}
+		{title: 'Board One', cards: _user$project$Board$cardList1},
+		{title: 'Board Two', cards: _user$project$Board$cardList2},
+		{title: 'Board Three', cards: _user$project$Board$cardList3}
 	]);
 var _user$project$Board$init = _user$project$Board$boardList;
 var _user$project$Board$model = {count: 0, boardList: _user$project$Board$boardList, mdl: _debois$elm_mdl$Material$model};
@@ -14039,11 +14076,9 @@ var _user$project$Board$board = function (board) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								A2(
-								_elm_lang$html$Html$ul,
+								_debois$elm_mdl$Material_Options$div,
 								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$class('')
-									]),
+									[]),
 								A2(_elm_lang$core$List$map, _user$project$Board$cardItem, board.cards))
 							])),
 						A2(
@@ -14081,19 +14116,18 @@ var _user$project$Board$board = function (board) {
 			]));
 };
 var _user$project$Board$viewBody = function (model) {
-	return _debois$elm_mdl$Material_Scheme$top(
-		A2(
-			_debois$elm_mdl$Material_Options$div,
-			_elm_lang$core$Native_List.fromArray(
-				[]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_debois$elm_mdl$Material_Grid$grid,
-					_elm_lang$core$Native_List.fromArray(
-						[]),
-					A2(_elm_lang$core$List$map, _user$project$Board$board, _user$project$Board$boardList))
-				])));
+	return A2(
+		_debois$elm_mdl$Material_Options$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_debois$elm_mdl$Material_Grid$grid,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				A2(_elm_lang$core$List$map, _user$project$Board$board, _user$project$Board$boardList))
+			]));
 };
 var _user$project$Board$view = function (model) {
 	return A4(
