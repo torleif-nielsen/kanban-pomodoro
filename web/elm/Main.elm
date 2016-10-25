@@ -11,7 +11,6 @@ main =
   App.program
     { init = ( Board.model, Cmd.none )
     , view = Board.view
-    -- Here we've added no subscriptions, but we'll need to use the `Mdl` subscriptions for some components later.
     , subscriptions = always Sub.none
     , update = Board.update
     }

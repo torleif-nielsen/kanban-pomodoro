@@ -5,17 +5,44 @@ import Html.App as App
 import Html.Attributes exposing (href, class, style)
 import Material
 import Material.Button as Button
+import Material.Card as Card
+import Material.Elevation as Elevation
+import Material.Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
-import Material.Options exposing (css)
+import Material.Options as Options exposing (..)
 import Material.Scheme
 
 -- MODEL
 
+type alias Card =
+  { description : String }
+
+type alias CardList =
+  List Card
+
+type alias Board =
+  List CardList
+
+cardList =
+  [ { description = "First Task"  }
+  , { description = "Second Task" }
+  , { description = "Third Task"  }
+  ]
+
+boardList =
+  [ cardList
+  , cardList
+  , cardList
+  ]
+
+init =
+  boardList
+
 -- This is referred to as the "model container"
 type alias Model =
   { count : Int
-  , mdl :
-    Material.Model
+  , cardList : CardList
+  , mdl : Material.Model
     -- Boilerplate: model store for any and all Mdl components you use.
   }
 
@@ -24,6 +51,7 @@ type alias Model =
 model : Model
 model =
   { count = 0
+  , cardList = cardList
   , mdl =
     Material.model
     -- Boilerplate: Always use this initial Mdl model store.
@@ -37,9 +65,7 @@ model =
 -- You need to tag `Msg` that are coming from `Mdl` so you can dispatch them
 -- appropriately.
 type Msg
-  = Increase
-  | Reset
-  | Mdl (Material.Msg Msg)
+  = Mdl (Material.Msg Msg)
 
 
 
@@ -49,16 +75,6 @@ type Msg
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
-    Increase ->
-      ( { model | count = model.count + 1 }
-      , Cmd.none
-      )
-
-    Reset ->
-      ( { model | count = 0 }
-      , Cmd.none
-      )
-
     -- When the `Mdl` messages come through, update appropriately.
     Mdl msg' ->
       Material.update msg' model
@@ -77,35 +93,48 @@ view model =
     model.mdl
     [ Layout.fixedHeader
     ]
-    { header = [ h3 [ style [ ( "padding", "0 2rem" ) ] ] [ text "Board" ] ]
+    { header = [ h1 [ style [ ( "padding", "0 2rem" ) ] ] [ text "Grapefruit" ] ]
     , drawer = []
     , tabs = ( [], [] )
     , main = [ viewBody model ]
     }
 
+cardItem card =
+  li [ class "" ] [ text (toString card.description) ]
+
+board board =
+  cell
+    [ size Desktop 4, size Tablet 6, size Phone 12]
+    [
+      Card.view
+        [ Elevation.e2 ]
+        [ Card.title
+          []
+          [ Card.head
+            []
+            [ text "Board" ]
+          ]
+        , Card.text []
+            [ ul [ class "" ] (List.map cardItem board) ]
+        , Card.actions
+            [ Card.border ]
+            [ Button.render Mdl [1,0] model.mdl
+              [ Button.ripple, Button.colored ]
+              [ text "Edit" ]
+            , Button.render Mdl [1,1] model.mdl
+              [ Button.ripple, Button.accent ]
+              [ text "Delete" ]
+            ]
+        ]
+    ]
+
 viewBody : Model -> Html Msg
 viewBody model =
-  div
-    [ style [ ( "padding", "2rem" ) ] ]
-    [ text ("Current count: " ++ toString model.count)
-      , Button.render Mdl
-        [ 0 ]
-        model.mdl
-        [ Button.raised
-        , Button.colored
-        , Button.onClick Increase
-        , css "margin" "0 1rem"
-        ]
-        [ text "Increase" ]
-        , Button.render Mdl
-        [ 1 ]
-        model.mdl
-        [ Button.raised
-        , Button.accent
-        , Button.onClick Reset ]
-        [ text "Reset" ]
-      ]
-      |> Material.Scheme.top
+  Options.div
+    []
+    [ (List.map board boardList) |> grid []  
+    ]
+    |> Material.Scheme.top
 
 -- Load Google Mdl CSS. You'll likely want to do that not in code as we
 -- do here, but rather in your master .html file. See the documentation
@@ -116,7 +145,6 @@ main =
   App.program
     { init = ( model, Cmd.none )
     , view = view
-    -- Here we've added no subscriptions, but we'll need to use the `Mdl` subscriptions for some components later.
     , subscriptions = always Sub.none
     , update = update
     }
