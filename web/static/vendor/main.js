@@ -13954,47 +13954,6 @@ var _debois$elm_mdl$Material_Scheme$top = function (content) {
 	return A3(_debois$elm_mdl$Material_Scheme$topWithScheme, _debois$elm_mdl$Material_Color$Grey, _debois$elm_mdl$Material_Color$Grey, content);
 };
 
-var _user$project$Board$cardItem = function (card) {
-	return A2(
-		_debois$elm_mdl$Material_Card$view,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_debois$elm_mdl$Material_Elevation$e2,
-				A2(_debois$elm_mdl$Material_Options$css, 'margin-bottom', '10px')
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_debois$elm_mdl$Material_Card$title,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_debois$elm_mdl$Material_Card$head,
-						_elm_lang$core$Native_List.fromArray(
-							[]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text(card.description)
-							]))
-					])),
-				A2(
-				_debois$elm_mdl$Material_Card$text,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Card description')
-					])),
-				A2(
-				_debois$elm_mdl$Material_Card$actions,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[]))
-			]));
-};
 var _user$project$Board$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
@@ -14036,6 +13995,72 @@ var _user$project$Board$Model = F3(
 	});
 var _user$project$Board$Mdl = function (a) {
 	return {ctor: 'Mdl', _0: a};
+};
+var _user$project$Board$cardItem = function (card) {
+	return A2(
+		_debois$elm_mdl$Material_Card$view,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_debois$elm_mdl$Material_Elevation$e2,
+				A2(_debois$elm_mdl$Material_Options$css, 'margin-bottom', '10px')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_debois$elm_mdl$Material_Card$title,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_debois$elm_mdl$Material_Card$head,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(card.description)
+							]))
+					])),
+				A2(
+				_debois$elm_mdl$Material_Card$text,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Card description')
+					])),
+				A2(
+				_debois$elm_mdl$Material_Card$actions,
+				_elm_lang$core$Native_List.fromArray(
+					[_debois$elm_mdl$Material_Card$border]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A5(
+						_debois$elm_mdl$Material_Button$render,
+						_user$project$Board$Mdl,
+						_elm_lang$core$Native_List.fromArray(
+							[1, 0]),
+						_user$project$Board$model.mdl,
+						_elm_lang$core$Native_List.fromArray(
+							[_debois$elm_mdl$Material_Button$ripple, _debois$elm_mdl$Material_Button$colored]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_debois$elm_mdl$Material_Icon$i('edit')
+							])),
+						A5(
+						_debois$elm_mdl$Material_Button$render,
+						_user$project$Board$Mdl,
+						_elm_lang$core$Native_List.fromArray(
+							[1, 1]),
+						_user$project$Board$model.mdl,
+						_elm_lang$core$Native_List.fromArray(
+							[_debois$elm_mdl$Material_Button$ripple, _debois$elm_mdl$Material_Button$accent]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_debois$elm_mdl$Material_Icon$i('delete')
+							]))
+					]))
+			]));
 };
 var _user$project$Board$board = function (board) {
 	return A2(
@@ -14091,25 +14116,13 @@ var _user$project$Board$board = function (board) {
 								_debois$elm_mdl$Material_Button$render,
 								_user$project$Board$Mdl,
 								_elm_lang$core$Native_List.fromArray(
-									[1, 0]),
-								_user$project$Board$model.mdl,
-								_elm_lang$core$Native_List.fromArray(
-									[_debois$elm_mdl$Material_Button$ripple, _debois$elm_mdl$Material_Button$colored]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html$text('Edit')
-									])),
-								A5(
-								_debois$elm_mdl$Material_Button$render,
-								_user$project$Board$Mdl,
-								_elm_lang$core$Native_List.fromArray(
 									[1, 1]),
 								_user$project$Board$model.mdl,
 								_elm_lang$core$Native_List.fromArray(
 									[_debois$elm_mdl$Material_Button$ripple, _debois$elm_mdl$Material_Button$accent]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html$text('Delete')
+										_debois$elm_mdl$Material_Icon$i('delete')
 									]))
 							]))
 					]))

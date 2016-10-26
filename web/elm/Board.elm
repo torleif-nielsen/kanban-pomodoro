@@ -7,6 +7,7 @@ import Material
 import Material.Button as Button
 import Material.Card as Card
 import Material.Elevation as Elevation
+import Material.Icon as Icon
 import Material.Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
 import Material.Options as Options exposing (..)
@@ -128,8 +129,14 @@ cardItem card =
       []
       [ text "Card description" ]
     , Card.actions
-      []
-      []
+      [ Card.border ]
+      [ Button.render Mdl [1,0] model.mdl
+        [ Button.ripple, Button.colored ]
+        [ Icon.i "edit" ]
+      , Button.render Mdl [1,1] model.mdl
+        [ Button.ripple, Button.accent ]
+        [ Icon.i "delete" ]
+      ]
     ]
 
 board board =
@@ -148,12 +155,9 @@ board board =
             [ Options.div [] (List.map cardItem board.cards) ]
         , Card.actions
             [ Card.border ]
-            [ Button.render Mdl [1,0] model.mdl
-              [ Button.ripple, Button.colored ]
-              [ text "Edit" ]
-            , Button.render Mdl [1,1] model.mdl
+            [ Button.render Mdl [1,1] model.mdl
               [ Button.ripple, Button.accent ]
-              [ text "Delete" ]
+              [ Icon.i "delete" ]
             ]
         ]
     ]
