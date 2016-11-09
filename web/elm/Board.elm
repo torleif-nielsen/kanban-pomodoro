@@ -11,7 +11,6 @@ import Material.Icon as Icon
 import Material.Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
 import Material.Options as Options exposing (..)
-import Material.Scheme
 
 -- MODEL
 
