@@ -8,26 +8,15 @@ import Material.Button as Button
 import Material.Card as Card
 import Material.Elevation as Elevation
 import Material.Icon as Icon
-import Material.Grid exposing (grid, cell, size, Device(..))
+import Material.Grid as Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
 import Material.Options as Options exposing (..)
 import Material.Scheme
 import Material.Textfield as Textfield
 import Material.Dialog as Dialog
+import Components.Section as Section exposing (..)
 
 -- MODEL
-type alias Mdl =
-  Material.Model
-
-type alias TaskCard =
-  { title       : String
-  , description : String
-  }
-
-type alias Section =
-  { title     : String
-  , taskCards : List TaskCard
-  }
 
 type alias Board =
   { title    : String
@@ -36,34 +25,20 @@ type alias Board =
   }
 
 -- INIT
-
-taskCard : TaskCard
-taskCard =
-  { title       = "Task"
-  , description = "A card for a task"
-  }
-
-section : Section
-section =
-  { title   = "Task List"
-  , taskCards =
-      [ taskCard
-      , taskCard
-      , taskCard
-      ]
-  }
-
-
-board : Board
-board =
+init : Board
+init =
   { title    = "Grapefruit Board"
   , sections =
-      [ section
-      , section
-      , section
+      [ Section.init
+      , Section.init
+      , Section.init
       ]
   , mdl = Material.model
   }
+
+board : Board
+board =
+  init
 
 -- MSG
 
@@ -93,25 +68,17 @@ view board =
         ]
     , drawer = []
     , tabs = ( [], [] )
-    , main = []
+    , main = [ viewBody board]
     }
---
---
--- type alias Mdl =
---   Material.Model
---
--- view : Model -> Html Msg
--- view board =
---   Layout.render Mdl
---     model.mdl
---     [ Layout.fixedHeader
---     ]
---     { header = [ h1 [ style [ ( "padding", "0 2rem" ) ] ] [ text "Grapefruit" ] ]
---     , drawer = []
---     , tabs = ( [], [] )
---     , main = [ viewBody model ]
---     }
---
+
+
+viewBody : Board -> Html Msg
+viewBody board =
+  Options.div
+    []
+    [ (List.map Section.view board.sections) |> grid []
+    ]
+
 -- cardItem card =
 --   Card.view
 --     [ Elevation.e2

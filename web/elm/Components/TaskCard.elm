@@ -1,4 +1,4 @@
-module Components.Card exposing (..)
+module Components.TaskCard exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (href, class, style)

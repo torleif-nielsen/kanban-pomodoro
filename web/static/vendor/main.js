@@ -14042,31 +14042,53 @@ var _debois$elm_mdl$Material_Scheme$top = function (content) {
 	return A3(_debois$elm_mdl$Material_Scheme$topWithScheme, _debois$elm_mdl$Material_Color$Grey, _debois$elm_mdl$Material_Color$Grey, content);
 };
 
+var _user$project$Components_Section$view = function (board) {
+	return A2(
+		_debois$elm_mdl$Material_Options$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text('Hello')
+			]));
+};
+var _user$project$Components_Section$update = F2(
+	function (msg, section) {
+		var _p0 = msg;
+		return A2(_debois$elm_mdl$Material$update, _p0._0, section);
+	});
+var _user$project$Components_Section$taskCard = {title: 'Task', description: 'A card for a task'};
+var _user$project$Components_Section$init = {
+	title: 'Task List',
+	taskCards: _elm_lang$core$Native_List.fromArray(
+		[_user$project$Components_Section$taskCard, _user$project$Components_Section$taskCard, _user$project$Components_Section$taskCard]),
+	mdl: _debois$elm_mdl$Material$model
+};
+var _user$project$Components_Section$section = _user$project$Components_Section$init;
+var _user$project$Components_Section$TaskCard = F2(
+	function (a, b) {
+		return {title: a, description: b};
+	});
+var _user$project$Components_Section$Section = F3(
+	function (a, b, c) {
+		return {title: a, taskCards: b, mdl: c};
+	});
+var _user$project$Components_Section$Mdl = function (a) {
+	return {ctor: 'Mdl', _0: a};
+};
+
 var _user$project$Components_Board$update = F2(
 	function (msg, board) {
 		var _p0 = msg;
 		return A2(_debois$elm_mdl$Material$update, _p0._0, board);
 	});
-var _user$project$Components_Board$taskCard = {title: 'Task', description: 'A card for a task'};
-var _user$project$Components_Board$section = {
-	title: 'Task List',
-	taskCards: _elm_lang$core$Native_List.fromArray(
-		[_user$project$Components_Board$taskCard, _user$project$Components_Board$taskCard, _user$project$Components_Board$taskCard])
-};
-var _user$project$Components_Board$board = {
+var _user$project$Components_Board$init = {
 	title: 'Grapefruit Board',
 	sections: _elm_lang$core$Native_List.fromArray(
-		[_user$project$Components_Board$section, _user$project$Components_Board$section, _user$project$Components_Board$section]),
+		[_user$project$Components_Section$init, _user$project$Components_Section$init, _user$project$Components_Section$init]),
 	mdl: _debois$elm_mdl$Material$model
 };
-var _user$project$Components_Board$TaskCard = F2(
-	function (a, b) {
-		return {title: a, description: b};
-	});
-var _user$project$Components_Board$Section = F2(
-	function (a, b) {
-		return {title: a, taskCards: b};
-	});
+var _user$project$Components_Board$board = _user$project$Components_Board$init;
 var _user$project$Components_Board$Board = F3(
 	function (a, b, c) {
 		return {title: a, sections: b, mdl: c};
@@ -14109,7 +14131,14 @@ var _user$project$Components_Board$view = function (board) {
 					[])
 			},
 			main: _elm_lang$core$Native_List.fromArray(
-				[])
+				[
+					A2(
+					_debois$elm_mdl$Material_Options$div,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[]))
+				])
 		});
 };
 
