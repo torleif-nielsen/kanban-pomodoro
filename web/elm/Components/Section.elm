@@ -29,11 +29,11 @@ type Msg
   = NoOp
 
 -- UPDATE
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model -> Model
 update msg model =
     case msg of
       NoOp ->
-        (model, Cmd.none)
+        model
 
 view : Model -> Html Msg
 view model =
@@ -42,5 +42,5 @@ view model =
     [ p
         []
         [ text model.title ]
-        
+
     ]

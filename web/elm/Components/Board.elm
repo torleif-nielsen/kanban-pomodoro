@@ -27,16 +27,13 @@ init =
 
 -- MSG
 type Msg
-  = NoOp
-  | StartEditing Int
+  = StartEditing Int
 
 
 -- UPDATE
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model -> Model
 update msg model =
     case msg of
-      NoOp ->
-        (model, Cmd.none)
       StartEditing taskId ->
         let
           startEditing taskFromModel =
@@ -45,10 +42,7 @@ update msg model =
             else
               taskFromModel
         in
-          ( { model | sections =
-                (List.map startEditing (List.concat model.sections)) }
-          , Cmd.none
-          )
+          (List.map (\a -> List.map startEditing a) model.sections)
 
 -- VIEW
 view : Model -> Html Msg

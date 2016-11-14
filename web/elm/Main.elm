@@ -9,7 +9,7 @@ import Components.Board as Board exposing (..)
 main : Program Never
 main =
   App.program
-    { init = ( Board.init, Cmd.none )
+    { init = Board.init
     , view = Board.view
     , subscriptions = always Sub.none
     , update = Board.update
