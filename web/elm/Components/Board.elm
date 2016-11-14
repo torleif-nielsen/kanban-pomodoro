@@ -2,221 +2,91 @@ module Components.Board exposing (..)
 
 import Html exposing (..)
 import Html.App as App
-import Html.Attributes exposing (href, class, style)
-import Material
-import Material.Button as Button
-import Material.Card as Card
-import Material.Elevation as Elevation
-import Material.Icon as Icon
-import Material.Grid exposing (grid, cell, size, Device(..))
-import Material.Layout as Layout
-import Material.Options as Options exposing (..)
-import Material.Scheme
-import Components.Section as Section exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Components.Section as Section
+import Components.Task as Task
 
 -- MODEL
-type alias Mdl =
-  Material.Model
-
-type alias TaskCard =
-  { description : String
-  , mdl         : Mdl
-  }
-
-type alias Section =
-  { title     : String
-  , taskCards : List TaskCard
-  , mdl       : Mdl
-  }
-
-type alias Board =
+type alias Model =
   { title    : String
-  , sections : List Section
-  , mdl      : Mdl
+  , sections : List Section.Model
   }
 
 -- INIT
--- Initialize starting values
-initMdl : Mdl
-initMdl = Material.model
 
-initTaskCard : TaskCard
-initTaskCard =
-  { description = "I'm a Task Card, edit me!"
-  , mdl         = initMdl
-  }
-
-initSection : Section
-initSection =
-  { title     = "I'm a board section!"
-  , taskCards =
-      [ initTaskCard
-      , initTaskCard
-      , initTaskCard
-      ]
-  , mdl       = initMdl
-  }
-
-initBoard : Board
-initBoard =
-  { title    = "Grapefruit Board"
+init : Model
+init =
+  { title = "Grapefruit Board"
   , sections =
-      [ initSection
-      , initSection
-      , initSection
+      [ Section.init 0
+      , Section.init 3
+      , Section.init 6
       ]
-  , mdl      = initMdl
   }
 
--- MESSAGE
+-- MSG
 type Msg
-  = Mdl (Material.Msg Msg)
-  | SectionMsg Section.Msg
+  = NoOp
+  | StartEditing Int
+
 
 -- UPDATE
-update : Msg -> Board -> ( Board, Cmd Msg )
-update msg board =
-  case msg of
-    Mdl msg' ->
-      Material.update msg' board
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+    case msg of
+      NoOp ->
+        (model, Cmd.none)
+      StartEditing taskId ->
+        let
+          startEditing taskFromModel =
+            if taskFromModel.id == taskId then
+              { taskFromModel | editing = not taskFromModel.editing }
+            else
+              taskFromModel
+        in
+          ( { model | sections =
+                (List.map startEditing (List.concat model.sections)) }
+          , Cmd.none
+          )
 
 -- VIEW
-view : Board -> Html Msg
-view board =
-  Layout.render Mdl
-    board.mdl
-    [ Layout.fixedHeader
+view : Model -> Html Msg
+view model =
+  div []
+    [ h1
+        []
+        [ text model.title ]
+    , div []
+        (List.map viewSection model.sections)
     ]
-    { header = [ h1 [ style [ ( "padding", "0 2rem" ) ] ] [ text "Grapefruit" ] ]
-    , drawer = []
-    , tabs = ( [], [] )
-    , main = []
-    }
 
-boardLayout : Board -> Html Msg
-boardLayout board =
-  Options.div
+viewSection : Section.Model -> Html Msg
+viewSection section =
+  div
     []
-    [ App.map SectionMsg (Section.view board.sections) |> grid []
+    [ p
+        []
+        [ text section.title ]
+    , div
+        []
+        (List.map viewTask section.tasks)
     ]
 
--- -- This is referred to as the "model container"
--- type alias Model =
---   { count : Int
---   , boardList : BoardList
---   , mdl : Material.Model
---     -- Boilerplate: model store for any and all Mdl components you use.
---   }
---
---
--- -- `Material.model` provides the initial model
--- model : Model
--- model =
---   { count = 0
---   , boardList = boardList
---   , mdl =
---     Material.model
---     -- Boilerplate: Always use this initial Mdl model store.
---   }
---
---
---
--- -- ACTION, UPDATE
---
---
--- -- You need to tag `Msg` that are coming from `Mdl` so you can dispatch them
--- -- appropriately.
--- type Msg
---   = Mdl (Material.Msg Msg)
---
---
---
--- -- Boilerplate: Msg clause for internal Mdl messages.
---
---
--- update : Msg -> Model -> ( Model, Cmd Msg )
--- update msg model =
---   case msg of
---     -- When the `Mdl` messages come through, update appropriately.
---     Mdl msg' ->
---       Material.update msg' model
---
---
---
--- -- VIEW
---
---
--- type alias Mdl =
---   Material.Model
---
--- view : Model -> Html Msg
--- view model =
---   Layout.render Mdl
---     model.mdl
---     [ Layout.fixedHeader
---     ]
---     { header = [ h1 [ style [ ( "padding", "0 2rem" ) ] ] [ text "Grapefruit" ] ]
---     , drawer = []
---     , tabs = ( [], [] )
---     , main = [ viewBody model ]
---     }
---
--- cardItem card =
---   Card.view
---     [ Elevation.e2
---     , css "margin-bottom" "10px"
---     ]
---     [ Card.title
---       []
---       [ Card.head
---         []
---         [ text card.description ]
---       ]
---     , Card.text
---       []
---       [ text "Card description" ]
---     , Card.actions
---       [ Card.border ]
---       [ Button.render Mdl [1,0] model.mdl
---         [ Button.ripple, Button.colored ]
---         [ Icon.i "edit" ]
---       , Button.render Mdl [1,1] model.mdl
---         [ Button.ripple, Button.accent ]
---         [ Icon.i "delete" ]
---       ]
---     ]
---
--- board board =
---   cell
---     [ size Desktop 4, size Tablet 6, size Phone 12 ]
---     [
---       Card.view
---         [  Elevation.e2 ]
---         [ Card.title
---           []
---           [ Card.head
---             []
---             [ text board.title ]
---           ]
---         , Card.text []
---             [ Options.div [] (List.map cardItem board.cards) ]
---         , Card.actions
---             [ Card.border ]
---             [ Button.render Mdl [1,1] model.mdl
---               [ Button.ripple, Button.accent ]
---               [ Icon.i "delete" ]
---             ]
---         ]
---     ]
---
--- viewBody : Model -> Html Msg
--- viewBody model =
---   Options.div
---     []
---     [ (List.map board boardList) |> grid []
---     ]
---     -- |> Material.Scheme.top
---
--- -- Load Google Mdl CSS. You'll likely want to do that not in code as we
--- -- do here, but rather in your master .html file. See the documentation
--- -- for the `Material` module for details.
+viewTask : Task.Model -> Html Msg
+viewTask task =
+  div
+    []
+    [ p
+        []
+        [ input
+            [ type' "text"
+            , readonly (not task.editing)
+            , value task.description
+            ]
+            []
+        ]
+    , button
+        [ onClick (StartEditing task.id) ]
+        [ text "Edit" ]
+    ]
