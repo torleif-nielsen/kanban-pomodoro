@@ -1,7 +1,6 @@
 module Components.Section exposing (..)
 
 import Components.Task as Task
-import Dict exposing (..)
 import Html exposing (..)
 import Html.App as App
 import Html.Attributes exposing (..)
@@ -18,6 +17,7 @@ type alias Model =
 
 
 
+
 init : Model
 init =
   { tasks = []
@@ -27,20 +27,24 @@ init =
 
 -- UPDATE
 
+type Dispatch
+  = Remove
+
 type Msg
   = Insert
   | TaskMsg ID Task.Msg
+  | RemoveSelf
 
 
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model -> (Model, Maybe Dispatch)
 update msg model =
   case msg of
     Insert ->
-      ( { model |
-          tasks = ( model.nextID, Task.init ) :: model.tasks,
-          nextID = model.nextID + 1
+      ( { model
+        | tasks  = ( model.nextID, Task.init ) :: model.tasks
+        , nextID = model.nextID + 1
         }
-      , Cmd.none
+      , Nothing
       )
 
     TaskMsg id taskMsg ->
@@ -55,8 +59,11 @@ update msg model =
               Just (taskID, newTaskModel) -- current task; other actions
       in
         ( { model | tasks = List.filterMap updateTask model.tasks }
-        , Cmd.none
+        , Nothing
         )
+
+    RemoveSelf ->
+      ( model, Just Remove )
 
 
 -- VIEW
@@ -65,7 +72,12 @@ view : Model -> Html Msg
 view model =
   let insert = button [ onClick Insert ] [ text "Add Task" ]
   in
-    div [] (insert :: List.map viewTask model.tasks)
+    div
+      []
+      [ h2 [] [ text ("Section") ]
+      , div [] (insert :: List.map viewTask model.tasks)
+      , button [ onClick RemoveSelf ] [ text "Delete Section" ]
+      ]
 
 
 viewTask : (ID, Task.Model) -> Html Msg
