@@ -1,16 +1,14 @@
 module Main exposing (..)
 
-import Html exposing (..)
 import Html.App as App
-import Html.Attributes exposing (href, class, style)
-import Components.Board as Board exposing (..)
+import Components.Section as Section
 
 
 main : Program Never
 main =
   App.program
-    { init = Board.init
-    , view = Board.view
+    { init = (Section.init, Cmd.none)
+    , view = Section.view
     , subscriptions = always Sub.none
-    , update = Board.update
+    , update = Section.update
     }

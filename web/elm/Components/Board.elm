@@ -1,5 +1,6 @@
 module Components.Board exposing (..)
 
+import Dict exposing (Dict)
 import Html exposing (..)
 import Html.App as App
 import Html.Attributes exposing (..)
@@ -27,22 +28,24 @@ init =
 
 -- MSG
 type Msg
-  = StartEditing Int
+  = NoOp
 
 
 -- UPDATE
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-      StartEditing taskId ->
-        let
-          startEditing taskFromModel =
-            if taskFromModel.id == taskId then
-              { taskFromModel | editing = not taskFromModel.editing }
-            else
-              taskFromModel
-        in
-          (List.map (\a -> List.map startEditing a) model.sections)
+      NoOp ->
+        model
+      -- StartEditing taskId ->
+      --   let
+      --     startEditing taskFromModel =
+      --       if taskFromModel.id == taskId then
+      --         { taskFromModel | editing = not taskFromModel.editing }
+      --       else
+      --         taskFromModel
+      --   in
+      --     (List.map (\a -> List.map startEditing a) model.sections)
 
 -- VIEW
 view : Model -> Html Msg
@@ -64,7 +67,8 @@ viewSection section =
         [ text section.title ]
     , div
         []
-        (List.map viewTask section.tasks)
+        []
+        List.map viewTask section.tasks)
     ]
 
 viewTask : Task.Model -> Html Msg
@@ -81,6 +85,6 @@ viewTask task =
             []
         ]
     , button
-        [ onClick (StartEditing task.id) ]
+        []
         [ text "Edit" ]
     ]
