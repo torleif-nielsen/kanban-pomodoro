@@ -2,7 +2,6 @@ module Components.Section exposing (..)
 
 import Components.Task as Task
 import Html exposing (..)
-import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
@@ -82,4 +81,4 @@ view model =
 
 viewTask : (ID, Task.Model) -> Html Msg
 viewTask (id, model) =
-  App.map (TaskMsg id) (Task.view model)
+  Html.map (TaskMsg id) (Task.view model)

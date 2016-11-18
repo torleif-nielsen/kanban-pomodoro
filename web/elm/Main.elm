@@ -1,12 +1,12 @@
 module Main exposing (..)
 
-import Html.App as App
 import Components.Board as Board
+import Html exposing (program)
 
 
-main : Program Never
+main : Program Never Board.Model Board.Msg
 main =
-  App.program
+  Html.program
     { init = (Board.init, Cmd.none)
     , view = Board.view
     , subscriptions = always Sub.none

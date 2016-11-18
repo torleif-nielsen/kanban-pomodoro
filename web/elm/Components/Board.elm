@@ -1,11 +1,9 @@
 module Components.Board exposing (..)
 
-import Dict exposing (Dict)
+import Components.Section as Section
 import Html exposing (..)
-import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Components.Section as Section
 
 -- MODEL
 type alias ID = Int
@@ -71,4 +69,4 @@ view model =
 
 viewSection : (ID, Section.Model) -> Html Msg
 viewSection (id, model) =
-  App.map (SectionMsg id) (Section.view model)
+  Html.map (SectionMsg id) (Section.view model)
