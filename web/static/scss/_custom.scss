@@ -1,3 +1,13 @@
 body {
   font-size: 16px;
+  background-color: $primary;
+  min-height: 100vh;
+}
+
+.columns {
+  margin: 0 15px 0 15px;
+}
+
+.task-description {
+  min-height: 120px;
 }

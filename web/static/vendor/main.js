@@ -8256,6 +8256,31 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
+var _fapian$elm_html_aria$Html_Attributes_Aria$role = _elm_lang$html$Html_Attributes$attribute('role');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaSelected = _elm_lang$html$Html_Attributes$attribute('aria-selected');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaLive = _elm_lang$html$Html_Attributes$attribute('aria-live');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaLabelledby = _elm_lang$html$Html_Attributes$attribute('aria-labelledby');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaLabel = _elm_lang$html$Html_Attributes$attribute('aria-label');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaExpanded = _elm_lang$html$Html_Attributes$attribute('aria-expanded');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaDescribedby = _elm_lang$html$Html_Attributes$attribute('aria-describedby');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaChecked = _elm_lang$html$Html_Attributes$attribute('aria-checked');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaActiveDescendant = _elm_lang$html$Html_Attributes$attribute('aria-activedescendant');
+var _fapian$elm_html_aria$Html_Attributes_Aria$boolAttribute = F2(
+	function (name, val) {
+		return A2(
+			_elm_lang$html$Html_Attributes$attribute,
+			name,
+			A2(
+				_elm_lang$core$Json_Encode$encode,
+				0,
+				_elm_lang$core$Json_Encode$bool(val)));
+	});
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaDisabled = _fapian$elm_html_aria$Html_Attributes_Aria$boolAttribute('aria-disabled');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaHidden = _fapian$elm_html_aria$Html_Attributes_Aria$boolAttribute('aria-hidden');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaPressed = _fapian$elm_html_aria$Html_Attributes_Aria$boolAttribute('aria-pressed');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaReadonly = _fapian$elm_html_aria$Html_Attributes_Aria$boolAttribute('aria-readonly');
+var _fapian$elm_html_aria$Html_Attributes_Aria$ariaRequired = _fapian$elm_html_aria$Html_Attributes_Aria$boolAttribute('aria-required');
+
 var _user$project$Components_Task$init = {description: 'I\'m an editable task', editing: false};
 var _user$project$Components_Task$Model = F2(
 	function (a, b) {
@@ -8296,101 +8321,195 @@ var _user$project$Components_Task$Edit = function (a) {
 };
 var _user$project$Components_Task$StartEditing = {ctor: 'StartEditing'};
 var _user$project$Components_Task$view = function (model) {
-	return A2(
+	var seeDescription = A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('box task-description'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(model.description),
+			_1: {ctor: '[]'}
+		});
+	var editDescription = A2(
+		_elm_lang$html$Html$textarea,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('textarea'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onInput(_user$project$Components_Task$Edit),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(model.description),
+			_1: {ctor: '[]'}
+		});
+	var $delete = A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('level-item'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Components_Task$RemoveSelf),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('button is-outlined is-danger'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$i,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('delete'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+	var edit = A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('level-item'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Components_Task$StartEditing),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('button is-outlined is-success'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$i,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('create'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+	return A2(
+		_elm_lang$html$Html$article,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('media'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$div,
-				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('media-content'),
+					_1: {ctor: '[]'}
+				},
 				{
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$textarea,
+						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$rows(4),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onInput(_user$project$Components_Task$Edit),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$readonly(!model.editing),
-									_1: {ctor: '[]'}
-								}
-							}
+							_0: _elm_lang$html$Html_Attributes$class('content'),
+							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text(model.description),
+							_0: _elm_lang$core$Native_Utils.eq(model.editing, true) ? editDescription : seeDescription,
 							_1: {ctor: '[]'}
 						}),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$span,
-							{ctor: '[]'},
+							_elm_lang$html$Html$nav,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(model.description),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$br,
-					{ctor: '[]'},
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$button,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(_user$project$Components_Task$StartEditing),
-							_1: {ctor: '[]'}
-						},
-						_elm_lang$core$Native_Utils.eq(model.editing, true) ? {
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Stop Editing'),
-							_1: {ctor: '[]'}
-						} : {
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Start Editing'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_user$project$Components_Task$RemoveSelf),
+								_0: _elm_lang$html$Html_Attributes$class('level'),
 								_1: {ctor: '[]'}
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('Delete Task'),
-								_1: {ctor: '[]'}
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('level-left'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: edit,
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('level-right'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: $delete,
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
 							}),
 						_1: {ctor: '[]'}
 					}
-				}
-			}
+				}),
+			_1: {ctor: '[]'}
 		});
 };
 
 var _user$project$Components_Section$init = {
 	tasks: {ctor: '[]'},
+	title: 'Section',
 	nextID: 0
 };
-var _user$project$Components_Section$Model = F2(
-	function (a, b) {
-		return {tasks: a, nextID: b};
+var _user$project$Components_Section$Model = F3(
+	function (a, b, c) {
+		return {tasks: a, title: b, nextID: c};
 	});
 var _user$project$Components_Section$Remove = {ctor: 'Remove'};
 var _user$project$Components_Section$update = F2(
@@ -8465,58 +8584,138 @@ var _user$project$Components_Section$viewTask = function (_p6) {
 };
 var _user$project$Components_Section$Insert = {ctor: 'Insert'};
 var _user$project$Components_Section$view = function (model) {
-	var insert = A2(
-		_elm_lang$html$Html$button,
+	var remove = A2(
+		_elm_lang$html$Html$a,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(_user$project$Components_Section$Insert),
-			_1: {ctor: '[]'}
+			_0: _elm_lang$html$Html_Attributes$class('card-footer-item'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Components_Section$RemoveSelf),
+				_1: {ctor: '[]'}
+			}
 		},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html$text('Add Task'),
+			_0: _elm_lang$html$Html$text('Delete Section'),
+			_1: {ctor: '[]'}
+		});
+	var insert = A2(
+		_elm_lang$html$Html$a,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('card-header-icon'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Components_Section$Insert),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$i,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+					_1: {
+						ctor: '::',
+						_0: _fapian$elm_html_aria$Html_Attributes_Aria$ariaHidden(true),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('add'),
+					_1: {ctor: '[]'}
+				}),
 			_1: {ctor: '[]'}
 		});
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('column is-one-third'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$h2,
-				{ctor: '[]'},
+				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('Section'),
+					_0: _elm_lang$html$Html_Attributes$class('card is-fullwidth'),
 					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: insert,
-						_1: A2(_elm_lang$core$List$map, _user$project$Components_Section$viewTask, model.tasks)
-					}),
-				_1: {
+				},
+				{
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$button,
+						_elm_lang$html$Html$header,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(_user$project$Components_Section$RemoveSelf),
+							_0: _elm_lang$html$Html_Attributes$class('card-header'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Delete Section'),
-							_1: {ctor: '[]'}
+							_0: A2(
+								_elm_lang$html$Html$p,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('card-header-title'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(model.title),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: insert,
+								_1: {ctor: '[]'}
+							}
 						}),
-					_1: {ctor: '[]'}
-				}
-			}
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('card-content'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('content'),
+										_1: {ctor: '[]'}
+									},
+									A2(_elm_lang$core$List$map, _user$project$Components_Section$viewTask, model.tasks)),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$footer,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('card-footer'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: remove,
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
 		});
 };
 
@@ -8593,12 +8792,17 @@ var _user$project$Components_Board$viewSection = function (_p6) {
 };
 var _user$project$Components_Board$Insert = {ctor: 'Insert'};
 var _user$project$Components_Board$view = function (model) {
+	var githubLink = 'https://github.com/torleif-nielsen/kanban-pomodoro';
 	var insert = A2(
 		_elm_lang$html$Html$button,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(_user$project$Components_Board$Insert),
-			_1: {ctor: '[]'}
+			_0: _elm_lang$html$Html_Attributes$class('button is-success'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Components_Board$Insert),
+				_1: {ctor: '[]'}
+			}
 		},
 		{
 			ctor: '::',
@@ -8611,23 +8815,94 @@ var _user$project$Components_Board$view = function (model) {
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$h1,
-				{ctor: '[]'},
+				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(model.title),
+					_0: _elm_lang$html$Html_Attributes$class('nav has-shadow'),
 					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('nav-item nav-left'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$a,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('is-brand'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$href('#'),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(model.title),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('nav-item nav-center'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: insert,
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('nav-item nav-right'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$a,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$href(githubLink),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Team Grapefruit'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
 				}),
 			_1: {
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$div,
-					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: insert,
-						_1: A2(_elm_lang$core$List$map, _user$project$Components_Board$viewSection, model.sections)
-					}),
+						_0: _elm_lang$html$Html_Attributes$class('columns is-multiline'),
+						_1: {ctor: '[]'}
+					},
+					A2(_elm_lang$core$List$map, _user$project$Components_Board$viewSection, model.sections)),
 				_1: {ctor: '[]'}
 			}
 		});

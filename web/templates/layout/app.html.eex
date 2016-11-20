@@ -10,6 +10,7 @@
     <title>Grapefruit Kanban!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- <script src="https://use.fontawesome.com/e530588820.js"></script> -->
   </head>
 
   <body>

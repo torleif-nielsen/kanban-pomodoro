@@ -57,16 +57,43 @@ update msg model =
 -- VIEW
 view : Model -> Html Msg
 view model =
-  let insert = button [ onClick Insert ] [ text "Add Section" ]
-  in
-    div []
-      [ h1
-          []
-          [ text model.title ]
-      , div []
-          (insert :: List.map viewSection model.sections)
-      ]
+  let
+    insert =
+      button
+        [ class "button is-success", onClick Insert ]
+        [ text "Add Section" ]
 
+    githubLink =
+      "https://github.com/torleif-nielsen/kanban-pomodoro"
+
+  in
+    div
+      []
+      [ div
+          [ class "nav has-shadow" ]
+          [ div
+              [ class "nav-item nav-left" ]
+              [ a
+                  [ class "is-brand"
+                  , href "#"
+                  ]
+                  [ text model.title ]
+              ]
+          , div
+              [ class "nav-item nav-center" ]
+              [ insert ]
+          , div
+              [ class "nav-item nav-right"]
+              [ a
+                  [ href githubLink]
+                  [ text "Team Grapefruit" ]
+              ]
+          ]
+      , div
+          [ class "columns is-multiline" ]
+          (List.map viewSection model.sections)
+
+      ]
 viewSection : (ID, Section.Model) -> Html Msg
 viewSection (id, model) =
   Html.map (SectionMsg id) (Section.view model)

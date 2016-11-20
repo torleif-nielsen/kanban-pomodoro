@@ -1,0 +1,114 @@
+// // Define SASS variables here.
+// ////////////////////////////////////////////////
+// ////////////////////////////////////////////////
+// // 1. Initial variables
+//
+// // Colors
+$black:        hsl(0, 0%, 4%) ;
+$black-bis:    hsl(0, 0%, 7%) ;
+$black-ter:    hsl(0, 0%, 14%) ;
+
+$grey-darker:  $black-ter      ;
+$grey-dark:    hsl(0, 0%, 13%) ;
+$grey:         hsl(0, 0%, 30%) ;
+$grey-light:   hsl(0, 0%, 50%) ;
+$grey-lighter: hsl(0, 0%, 60%) ;
+
+$white-ter:    hsl(0, 0%, 96%) ;
+$white-bis:    hsl(0, 0%, 98%) ;
+$white:        hsl(0, 0%, 100%) ;
+
+$orange:       hsl(14,  100%, 53%) ;
+$yellow:       hsl(48,  100%, 67%) ;
+$green:        hsl(141, 71%,  48%) ;
+$turquoise:    hsl(171, 100%, 41%) ;
+$blue:         hsl(217, 71%,  53%) ;
+$purple:       hsl(271, 100%, 71%) ;
+$red:          hsl(348, 100%, 61%) ;
+//
+// // Typography
+$family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif ;
+$family-monospace: "Inconsolata", "Consolas", "Monaco", monospace ;
+
+$size-1: 48px ;
+$size-2: 40px ;
+$size-3: 28px ;
+$size-4: 24px ;
+$size-5: 18px ;
+$size-6: 14px ;
+
+$size-7: 11px ;
+
+$weight-normal: 400 ;
+$weight-bold: 700 ;
+$weight-title-normal: 300 ;
+$weight-title-bold: 500 ;
+
+// Miscellaneous
+$easing: ease-out ;
+$radius-small: 2px ;
+$radius: 3px ;
+$radius-large: 5px ;
+$speed: 86ms ;
+//
+// ////////////////////////////////////////////////
+// ////////////////////////////////////////////////
+// // 2. Primary colors
+
+$primary: $turquoise ;
+
+$info: $blue ;
+$success: $green ;
+$warning: $yellow ;
+$danger: $red ;
+
+$light: $white-ter ;
+$dark: $grey-darker ;
+
+////////////////////////////////////////////////
+////////////////////////////////////////////////
+// 3. Applied variables
+$light-invert: $dark ;
+$dark-invert: $light ;
+
+// General colors
+$body-background: $white-ter ;
+
+$background: $white-ter ;
+
+$border: $grey-lighter ;
+$border-hover: $grey-light ;
+
+// Text colors
+$text: $grey-dark ;
+$text-invert: findColorInvert($text) ;
+$text-light: $grey ;
+$text-strong: $grey-darker ;
+
+// Code colors
+$code: $red ;
+$code-background: $background ;
+
+$pre: $text ;
+$pre-background: $background ;
+
+// Link colors
+$link: $primary ;
+$link-visited: $purple ;
+
+$link-hover: $grey-darker ;
+$link-hover-background: $white-ter ;
+$link-hover-border: $grey-darker ;
+
+$link-active: $grey-darker ;
+$link-active-border: $grey-darker ;
+
+// Typography
+$family-primary: $family-sans-serif ;
+$family-code: $family-monospace ;
+
+$size-small: $size-7 ;
+$size-normal: $size-6 ;
+$size-medium: $size-5 ;
+$size-large: $size-3 ;
+$size-huge: $size-1 ;

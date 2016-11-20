@@ -64,7 +64,7 @@ exports.config = {
     sass: {
       options: {
         includePaths: [
-          "node_modules/material-design-lite/src"
+          "node_modules/bulma"
         ]
       }
     }

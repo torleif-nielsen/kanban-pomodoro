@@ -12,12 +12,12 @@
   "devDependencies": {
     "babel-brunch": "~6.0.0",
     "brunch": "2.7.4",
+    "bulma": "^0.2.3",
     "clean-css-brunch": "~2.0.0",
     "css-brunch": "~2.0.0",
     "elm": "^0.18.0",
     "elm-brunch": "^0.7.0",
     "javascript-brunch": "~2.0.0",
-    "material-design-lite": "^1.2.1",
     "sass-brunch": "^2.7.0",
     "uglify-js-brunch": "~2.0.1"
   }

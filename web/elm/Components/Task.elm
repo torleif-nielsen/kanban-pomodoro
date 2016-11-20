@@ -44,24 +44,64 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ div
-        []
-        [ textarea
-            [ rows 4
-            , onInput Edit
-            , readonly (not model.editing)
+  let
+    edit =
+      div
+        [ class "level-item"
+        , onClick StartEditing
+        ]
+        [ button
+            [ class "button is-outlined is-success" ]
+            [ i
+                [ class "material-icons"]
+                [ text "create" ]
             ]
-            [ text model.description ]
-        , span [] [ text model.description ]
+        ]
+
+    delete =
+      div
+        [ class "level-item"
+        , onClick RemoveSelf
+        ]
+        [ button
+            [ class "button is-outlined is-danger" ]
+            [ i
+                [ class "material-icons"]
+                [ text "delete" ]
+            ]
+        ]
+
+    editDescription =
+      textarea
+        [ class "textarea"
+        , onInput Edit
+        ]
+        [ text model.description ]
+
+    seeDescription =
+      div
+        [ class "box task-description" ]
+        [ text model.description ]
+  in
+    article
+      [ class "media" ]
+      [ div
+          [ class "media-content" ]
+          [ div
+              [ class "content" ]
+              [ if model.editing == True then
+                  editDescription
+                else
+                  seeDescription
+              ]
+          , nav
+              [ class "level" ]
+              [ div
+                  [ class "level-left" ]
+                  [ edit ]
+              , div
+                  [ class "level-right" ]
+                  [ delete]
+              ]
+          ]
       ]
-    , br [][]
-    , button
-        [ onClick StartEditing ]
-        ( if model.editing  == True then
-            [ text "Stop Editing"  ]
-          else
-            [ text "Start Editing" ]
-        )
-    , button [ onClick RemoveSelf ] [ text "Delete Task" ]
-    ]

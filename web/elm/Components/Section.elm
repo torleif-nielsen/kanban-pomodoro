@@ -3,6 +3,7 @@ module Components.Section exposing (..)
 import Components.Task as Task
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Attributes.Aria exposing (ariaHidden)
 import Html.Events exposing (..)
 
 
@@ -11,6 +12,7 @@ type alias ID = Int
 
 type alias Model =
   { tasks : List ( ID, Task.Model )
+  , title : String
   , nextID : ID
   }
 
@@ -20,6 +22,7 @@ type alias Model =
 init : Model
 init =
   { tasks = []
+  , title = "Section"
   , nextID = 0
   }
 
@@ -69,13 +72,46 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  let insert = button [ onClick Insert ] [ text "Add Task" ]
+  let
+    insert =
+      a
+        [ class "card-header-icon"
+        , onClick Insert
+        ]
+        [ i
+            [ class "material-icons"
+            , ariaHidden True
+            ]
+            [ text "add" ]
+        ]
+    remove =
+      a
+        [ class "card-footer-item"
+        , onClick RemoveSelf
+        ]
+        [ text "Delete Section" ]
   in
     div
-      []
-      [ h2 [] [ text ("Section") ]
-      , div [] (insert :: List.map viewTask model.tasks)
-      , button [ onClick RemoveSelf ] [ text "Delete Section" ]
+      [ class "column is-one-third" ]
+      [ div
+          [ class "card is-fullwidth" ]
+          [ header
+              [ class "card-header" ]
+              [ p
+                  [ class "card-header-title" ]
+                  [ text (model.title) ]
+              , insert
+              ]
+          , div
+              [ class "card-content" ]
+              [ div
+                  [ class "content" ]
+                  (List.map viewTask model.tasks)
+              ]
+          , footer
+              [ class "card-footer" ]
+              [ remove ]
+          ]
       ]
 
 
